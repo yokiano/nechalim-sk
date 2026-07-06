@@ -1,0 +1,276 @@
+:root {
+	/* ── Design tokens: docs/design-system.md ─────────────────── */
+	/* Colors - Brand */
+	--color-brand-yellow-500: #f9c04e;
+	--color-brand-yellow-600: #e8aa31;
+	--color-brand-blue-500: #4b8cc0;
+	--color-brand-blue-600: #3d7faf;
+	--color-brand-navy-900: #1a2a37;
+	--color-brand-cream-200: #fae6b7;
+	--color-brand-sky-100: #e8f2f4;
+	--color-brand-sky-200: #dcecef;
+
+	/* Colors - Background */
+	--color-bg-default: #ffffff;
+	--color-bg-light: #f6f9fb;
+	--color-bg-sky: #e8f2f4;
+	--color-bg-overlay-dark: rgba(10, 18, 24, 0.62);
+
+	/* Colors - Text */
+	--color-text-primary: #151413;
+	--color-text-heading: #0f1720;
+	--color-text-secondary: #484745;
+	--color-text-muted: #7a7f83;
+	--color-text-inverse: #ffffff;
+	--color-text-inverse-muted: #efefeb;
+
+	/* Colors - Borders */
+	--color-border-light: #e1e7ea;
+	--color-border-default: #c6cacd;
+	--color-border-icon: #9fc6d8;
+
+	/* Colors - States */
+	--color-success: #25b86b;
+	--color-error: #d9534f;
+
+	/* Typography */
+	--font-family-base: 'Heebo', 'Assistant', 'Arial', sans-serif;
+
+	/* Spacing (8px rhythm) */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 24px;
+	--space-6: 32px;
+	--space-7: 40px;
+	--space-8: 48px;
+	--space-9: 64px;
+	--space-10: 80px;
+	--space-11: 96px;
+
+	/* Radius */
+	--radius-xs: 2px;
+	--radius-sm: 4px;
+	--radius-md: 6px;
+	--radius-lg: 8px;
+	--radius-full: 999px;
+
+	/* Shadows */
+	--shadow-sm: 0 2px 6px rgba(15, 23, 32, 0.08);
+	--shadow-md: 0 4px 14px rgba(15, 23, 32, 0.1);
+	--shadow-lg: 0 10px 28px rgba(15, 23, 32, 0.18);
+
+	/* Layout */
+	--container-max-width: 1160px;
+
+	--transition: 180ms ease;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-family-base);
+	color: var(--color-text-primary);
+	background: var(--color-bg-default);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+::selection {
+	background: var(--color-brand-yellow-500);
+	color: var(--color-text-heading);
+}
+
+h1,
+h2,
+h3 {
+	color: inherit;
+	font-weight: 800;
+	line-height: 1.2;
+	margin: 0;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	font-family: inherit;
+	cursor: pointer;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.container {
+	max-width: var(--container-max-width);
+	margin-inline: auto;
+	padding-inline: var(--space-5);
+}
+
+/* ── Section header pieces ────────────────────────────────── */
+.kicker {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+	background: var(--color-brand-sky-200);
+	color: var(--color-brand-navy-900);
+	font-weight: 700;
+	font-size: 13px;
+	padding: 6px 14px;
+	border-radius: var(--radius-full);
+	letter-spacing: 0.02em;
+}
+
+.section-title {
+	font-size: clamp(28px, 4vw, 40px);
+	line-height: 1.25;
+	color: var(--color-text-heading);
+	margin-top: var(--space-4);
+}
+
+/* Marker highlight */
+.hl {
+	position: relative;
+	white-space: nowrap;
+	z-index: 0;
+}
+
+.hl::after {
+	content: '';
+	position: absolute;
+	inset: 60% -0.12em 4% -0.12em;
+	background: var(--color-brand-yellow-500);
+	border-radius: var(--radius-xs);
+	transform: rotate(-1deg) scaleX(0);
+	transform-origin: right;
+	z-index: -1;
+	animation: hl-draw 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes hl-draw {
+	to {
+		transform: rotate(-1deg) scaleX(1);
+	}
+}
+
+/* ── Buttons (design-system §4) ───────────────────────────── */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	height: 46px;
+	padding: 0 var(--space-5);
+	border-radius: var(--radius-sm);
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1;
+	border: 1px solid transparent;
+	text-decoration: none;
+	transition: all var(--transition);
+}
+
+.btn:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+	transform: translateY(0);
+}
+
+.btn-primary {
+	background: var(--color-brand-blue-500);
+	color: var(--color-text-inverse);
+	border-color: var(--color-brand-blue-500);
+}
+
+.btn-primary:hover {
+	background: var(--color-brand-blue-600);
+}
+
+.btn-yellow {
+	background: var(--color-brand-yellow-500);
+	color: var(--color-text-heading);
+	border-color: var(--color-brand-yellow-500);
+}
+
+.btn-yellow:hover {
+	background: var(--color-brand-yellow-600);
+}
+
+.btn-secondary {
+	background: var(--color-bg-default);
+	color: var(--color-brand-navy-900);
+	border-color: #d8e0e4;
+}
+
+.btn-secondary:hover {
+	background: var(--color-bg-light);
+}
+
+.btn-whatsapp {
+	background: var(--color-bg-default);
+	color: var(--color-brand-navy-900);
+	border-color: #d8e0e4;
+}
+
+.btn-whatsapp svg {
+	color: var(--color-success);
+}
+
+.btn-whatsapp:hover {
+	background: var(--color-bg-light);
+}
+
+/* ── Icon circle (design-system §Icons) ───────────────────── */
+.icon-circle {
+	width: 56px;
+	height: 56px;
+	border-radius: var(--radius-full);
+	border: 1px dashed var(--color-border-icon);
+	display: grid;
+	place-items: center;
+	color: var(--color-brand-blue-500);
+	background: var(--color-bg-default);
+	flex-shrink: 0;
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────── */
+.reveal {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.65s ease,
+		transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.in {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal,
+	.hl::after {
+		opacity: 1;
+		transform: none;
+		transition: none;
+		animation: none;
+	}
+}
