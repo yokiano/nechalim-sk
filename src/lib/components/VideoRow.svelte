@@ -28,7 +28,7 @@
 		scroller?.scrollBy({ left: dir * -340, behavior: 'smooth' });
 	}
 
-	const schema = JSON.stringify({
+	const schema = $derived(JSON.stringify({
 		'@context': 'https://schema.org',
 		'@graph': videos.map((v) => ({
 			'@type': 'VideoObject',
@@ -38,7 +38,7 @@
 			embedUrl: `https://www.youtube.com/embed/${v.id}`,
 			uploadDate: '2025-05-01'
 		}))
-	});
+	}));
 </script>
 
 <svelte:head>
