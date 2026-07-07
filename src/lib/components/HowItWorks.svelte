@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
+	import studentsBg from '$lib/assets/backgrounds/students-laptop.jpg';
 	import { SlidersHorizontal, Wallet, Ambulance, ArrowLeft } from '@lucide/svelte';
 
 	const steps = [
@@ -38,6 +39,7 @@
 </svelte:head>
 
 <section class="how" id="how">
+	<div class="how-bg" style="background-image: url({studentsBg})" aria-hidden="true"></div>
 	<div class="container">
 		<div class="head" use:reveal>
 			<span class="kicker">בלי טפסים מסובכים</span>
@@ -63,7 +65,7 @@
 		</ol>
 
 		<div class="ctas" use:reveal={300}>
-			<a class="btn btn-primary" href="#contact">להצטרפות</a>
+			<a class="btn btn-primary" href="#join">להצטרפות</a>
 			<a
 				class="btn btn-whatsapp"
 				href="https://wa.me/972525605336"
@@ -87,8 +89,37 @@
 
 <style>
 	.how {
+		position: relative;
 		padding-block: var(--space-10);
 		background: var(--color-bg-light);
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.how-bg {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background-position: center 40%;
+		background-size: cover;
+		background-repeat: no-repeat;
+		opacity: 0.1;
+	}
+
+	.how-bg::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			135deg,
+			var(--color-bg-light) 8%,
+			rgba(245, 248, 250, 0.75) 50%,
+			var(--color-bg-light) 92%
+		);
+	}
+
+	.container {
+		position: relative;
 	}
 
 	.head {

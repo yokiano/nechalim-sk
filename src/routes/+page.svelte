@@ -3,6 +3,7 @@
 	import Questions from '$lib/components/Questions.svelte';
 	import Benefits from '$lib/components/Benefits.svelte';
 	import Tracks from '$lib/components/Tracks.svelte';
+	import Join from '$lib/components/Join.svelte';
 	import Countries from '$lib/components/Countries.svelte';
 	import Insurability from '$lib/components/Insurability.svelte';
 	import Compare from '$lib/components/Compare.svelte';
@@ -105,6 +106,7 @@
 <Questions />
 <Benefits />
 <Tracks />
+<Join />
 <Countries />
 <Insurability />
 <Compare />

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
+	import harelLogo from '$lib/assets/logos/harel-logo.webp';
 	import { Check, X, ShieldCheck, ArrowLeft } from '@lucide/svelte';
 
 	type Row = {
@@ -62,6 +63,7 @@
 							<span class="col-brand">
 								<ShieldCheck size={19} strokeWidth={2.2} />
 								נחלים × הראל
+								<img class="col-harel" src={harelLogo} alt="הראל" width="56" height="22" />
 							</span>
 						</th>
 						<th class="other-col" scope="col">ביטוח אחר</th>
@@ -192,6 +194,12 @@
 
 	.col-brand :global(svg) {
 		flex-shrink: 0;
+	}
+
+	.col-harel {
+		height: 15px;
+		width: auto;
+		opacity: 0.88;
 	}
 
 	.other-col {

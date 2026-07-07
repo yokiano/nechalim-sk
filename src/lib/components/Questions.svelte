@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
+	import nirPortrait from '$lib/assets/people/nir-stilogalo-profile-pic.jpg';
 	import { Wallet, Stethoscope, HandCoins, RefreshCw, MoonStar, Play } from '@lucide/svelte';
+
+	const videoId = 'Ba1i6kGB2wI';
 
 	const questions = [
 		{ icon: Wallet, text: 'כמה עולה ביטוח סטודנטים, באמת?' },
@@ -9,6 +12,8 @@
 		{ icon: RefreshCw, text: 'האם אצטרך לחדש את הביטוח כל שנה מחדש?' },
 		{ icon: MoonStar, text: 'מה קורה אם אזדקק לרופא בלילה או בסופ״ש?' }
 	];
+
+	let playing = $state(false);
 </script>
 
 <section class="questions">
@@ -35,17 +40,28 @@
 		</div>
 
 		<div class="video-wrap" use:reveal={150}>
-			<button class="video-card" aria-label="נגן את הסרטון של ניר סטילוגלו">
-				<img class="video-img" src="/img/ceo-portrait.jpg" alt="" loading="lazy" />
-				<div class="video-overlay"></div>
-				<span class="play">
-					<Play size={26} strokeWidth={2.4} fill="currentColor" />
-				</span>
-				<div class="video-caption">
-					<strong>ניר סטילוגלו</strong>
-					<span>מנכ״ל נחלים · 27 שנים בביטוח · עונה בעצמו בוואטסאפ</span>
+			{#if playing}
+				<div class="video-embed">
+					<iframe
+						src="https://www.youtube.com/embed/{videoId}?autoplay=1"
+						title="ניר סטילוגלו — 5 שאלות שחייבים לשאול לפני שבוחרים ביטוח"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					></iframe>
 				</div>
-			</button>
+			{:else}
+				<button class="video-card" onclick={() => (playing = true)} aria-label="נגן את הסרטון של ניר סטילוגלו">
+					<img class="video-img" src={nirPortrait} alt="ניר סטילוגלו" loading="lazy" />
+					<div class="video-overlay"></div>
+					<span class="play">
+						<Play size={26} strokeWidth={2.4} fill="currentColor" />
+					</span>
+					<div class="video-caption">
+						<strong>ניר סטילוגלו</strong>
+						<span>מנכ״ל נחלים · 27 שנים בביטוח · עונה בעצמו בוואטסאפ</span>
+					</div>
+				</button>
+			{/if}
 			<div class="sticker">בלי חפירות,<br />90 שניות</div>
 		</div>
 	</div>
@@ -109,18 +125,33 @@
 		position: relative;
 	}
 
+	.video-embed,
 	.video-card {
-		position: relative;
-		display: block;
 		width: 100%;
 		aspect-ratio: 4 / 5;
-		border: none;
-		padding: 0;
 		border-radius: var(--radius-lg);
 		overflow: hidden;
 		box-shadow: var(--shadow-lg);
+	}
+
+	.video-embed {
+		background: #000;
+	}
+
+	.video-embed iframe {
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+
+	.video-card {
+		position: relative;
+		display: block;
+		border: none;
+		padding: 0;
 		color: var(--color-text-inverse);
 		text-align: start;
+		cursor: pointer;
 	}
 
 	.video-img {
@@ -211,6 +242,7 @@
 		transform: rotate(4deg);
 		box-shadow: var(--shadow-sm);
 		text-align: center;
+		pointer-events: none;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -229,6 +261,7 @@
 			gap: var(--space-8);
 		}
 
+		.video-embed,
 		.video-card {
 			aspect-ratio: 4 / 4.2;
 		}

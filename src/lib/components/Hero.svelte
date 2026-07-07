@@ -2,6 +2,10 @@
 	import { reveal } from '$lib/actions/reveal';
 	import { countup } from '$lib/actions/countup';
 	import WhatsAppIcon from './WhatsAppIcon.svelte';
+	import nechalimLogo from '$lib/assets/logos/nechalim-logo.png';
+	import harelLogo from '$lib/assets/logos/harel-logo.webp';
+	import nirPortrait from '$lib/assets/people/nir-stilogalo-profile-pic.jpg';
+	import heroBg from '$lib/assets/backgrounds/hero-plane.jpg';
 	import {
 		ShieldCheck,
 		Plane,
@@ -23,19 +27,20 @@
 </script>
 
 <header class="hero">
-	<div class="hero-bg" aria-hidden="true"></div>
+	<div class="hero-bg" style="background-image: url({heroBg})" aria-hidden="true"></div>
 
 	<nav class="container nav">
-		<div class="logo">
-			נחלים<span class="logo-dot">.</span>
+		<a href="/" class="logo" aria-label="נחלים — ביטוח סטודנטים">
+			<img class="logo-img" src={nechalimLogo} alt="נחלים" width="120" height="36" />
 			<span class="logo-sub">ביטוח סטודנטים</span>
-		</div>
+		</a>
 		<a href="#join" class="btn btn-yellow nav-cta">להצטרפות</a>
 	</nav>
 
 	<div class="container hero-grid">
 		<div class="hero-copy">
 			<span class="hero-badge" use:reveal>
+				<img class="badge-harel" src={harelLogo} alt="הראל" width="52" height="20" />
 				<ShieldCheck size={16} strokeWidth={2} />
 				מגובה ע״י הראל, חברת ביטוחי הבריאות הגדולה בישראל
 			</span>
@@ -74,7 +79,7 @@
 		<div class="hero-visual" use:reveal={200}>
 			<div class="phone-card">
 				<div class="chat-header">
-					<img src="/img/ceo-portrait.jpg" alt="" width="38" height="38" />
+					<img src={nirPortrait} alt="ניר סטילוגלו" width="38" height="38" />
 					<div>
 						<strong>ניר · מנכ״ל נחלים</strong>
 						<span>מחובר עכשיו</span>
@@ -128,7 +133,9 @@
 		position: absolute;
 		inset: 0;
 		z-index: -1;
-		background: url('/img/hero-plane.jpg') center 30% / cover no-repeat;
+		background-position: center 30%;
+		background-size: cover;
+		background-repeat: no-repeat;
 		animation: bg-zoom 18s ease-out forwards;
 	}
 
@@ -158,22 +165,32 @@
 	}
 
 	.logo {
-		font-size: 26px;
-		font-weight: 900;
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		gap: var(--space-3);
+		text-decoration: none;
+		color: inherit;
 	}
 
-	.logo-dot {
-		color: var(--color-brand-yellow-500);
-		margin-inline-start: -12px;
+	.logo-img {
+		height: 34px;
+		width: auto;
+		display: block;
+		mix-blend-mode: multiply;
 	}
 
 	.logo-sub {
 		font-size: 13px;
 		font-weight: 500;
 		color: var(--color-brand-sky-200);
+	}
+
+	.badge-harel {
+		height: 18px;
+		width: auto;
+		flex-shrink: 0;
+		filter: brightness(0) invert(1);
+		opacity: 0.92;
 	}
 
 	.nav-cta {
@@ -386,7 +403,7 @@
 	}
 
 	.float-chip.cover {
-		bottom: -14px;
+		bottom: -32px;
 		inset-inline-start: -20px;
 		animation-delay: -2s;
 	}
@@ -471,6 +488,7 @@
 		}
 
 		.float-chip.cover {
+			bottom: -28px;
 			inset-inline-start: 4px;
 		}
 	}

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
 	import WhatsAppIcon from './WhatsAppIcon.svelte';
+	import campusBg from '$lib/assets/backgrounds/campus-walk.jpg';
+	import harelLogo from '$lib/assets/logos/harel-logo.webp';
 	import {
 		HeartPulse,
 		BadgePercent,
@@ -71,6 +73,7 @@
 </script>
 
 <section class="benefits">
+	<div class="benefits-bg" style="background-image: url({campusBg})" aria-hidden="true"></div>
 	<div class="container">
 		<div class="head" use:reveal>
 			<span class="kicker">הנתון שאומר הכל</span>
@@ -90,6 +93,9 @@
 					use:reveal={(i % 4) * 70}
 				>
 					<span class="icon-circle"><Icon size={26} strokeWidth={1.7} /></span>
+					{#if card.title === 'הגב של נחלים הוא הראל'}
+						<img class="card-harel" src={harelLogo} alt="הראל" width="72" height="28" />
+					{/if}
 					<h3>{card.title}</h3>
 					<p>{card.body}</p>
 				</article>
@@ -108,8 +114,37 @@
 
 <style>
 	.benefits {
+		position: relative;
 		padding-block: var(--space-10);
 		background: var(--color-bg-light);
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.benefits-bg {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		opacity: 0.14;
+	}
+
+	.benefits-bg::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			180deg,
+			var(--color-bg-light) 0%,
+			rgba(245, 248, 250, 0.82) 45%,
+			var(--color-bg-light) 100%
+		);
+	}
+
+	.container {
+		position: relative;
 	}
 
 	.head {
@@ -189,6 +224,13 @@
 	.card.sky {
 		background: var(--color-brand-sky-100);
 		border: none;
+	}
+
+	.card-harel {
+		height: 22px;
+		width: auto;
+		align-self: flex-start;
+		margin-top: calc(var(--space-2) * -1);
 	}
 
 	h3 {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
 	import { Plane, Star, MessageCircle } from '@lucide/svelte';
+	import mapDots from '$lib/assets/maps/worldmap-dots.svg';
 	import mapData from '$lib/data/mappins.json';
 
 	type Country = {
@@ -84,17 +85,20 @@
 <section class="countries" id="countries">
 	<div class="container">
 		<div class="head" use:reveal>
-			<span class="kicker dark">25 יעדים · מחיר לפי מדינה</span>
+			<span class="kicker dark">25 יעדים · כיסוי מותאם</span>
 			<h2 class="section-title">
-				אז כמה זה יעלה בפועל?<br />
+				לאן אתם טסים ללמוד?<br />
 				<span class="hl">בחרו את המדינה שלכם</span>
 			</h2>
-			<p class="lede">לכל מדינה עמוד משלה עם מחירים מדויקים, מסלולים והטבות. טיסה קצרה משם.</p>
+			<p class="lede">
+				לכל יעד עמוד ייעודי עם מסלולים, כיסויים והטבות שמתאימים בדיוק לשם. לחצו על המדינה — או על
+				הנקודה במפה.
+			</p>
 		</div>
 
 		<div class="map-wrap" use:reveal={120}>
 			<div class="map-inner">
-				<img class="map-dots" src="/img/worldmap-dots.svg" alt="" loading="lazy" draggable="false" />
+				<img class="map-dots" src={mapDots} alt="" loading="lazy" draggable="false" />
 
 				<svg
 					class="flight"
@@ -221,6 +225,7 @@
 
 	.map-inner {
 		position: relative;
+		overflow: visible;
 	}
 
 	.map-dots {
@@ -266,8 +271,10 @@
 		position: absolute;
 		translate: -50% -50%;
 		pointer-events: none;
-		display: grid;
-		place-items: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		overflow: visible;
 	}
 
 	.home-dot {
@@ -329,9 +336,13 @@
 		color: var(--color-text-heading);
 		font-size: 13px;
 		font-weight: 700;
-		padding: 4px 12px;
+		padding: 5px 12px;
 		border-radius: var(--radius-full);
-		white-space: nowrap;
+		width: max-content;
+		max-width: min(180px, 42vw);
+		white-space: normal;
+		text-align: center;
+		line-height: 1.25;
 		box-shadow: var(--shadow-md);
 		animation: label-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 	}
@@ -370,6 +381,7 @@
 	.flag-img {
 		width: 21px;
 		height: auto;
+		flex-shrink: 0;
 		border-radius: 3px;
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
 	}

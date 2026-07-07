@@ -140,7 +140,7 @@
 					</ul>
 					<div class="panel-ctas">
 						<a href="#join" class="btn btn-primary">להצטרפות למסלול</a>
-						<a href="#more" class="more-link">
+						<a href="#faq" class="more-link">
 							לקריאה נוספת
 							<ArrowLeft size={16} strokeWidth={2.2} />
 						</a>
